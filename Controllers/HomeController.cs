@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission_13.Models;
 
@@ -11,27 +12,59 @@ namespace Mission_13.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private BowlingDbContext _repo { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(BowlingDbContext temp)
         {
-            _logger = logger;
+            _repo = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var blah = _repo.Bowlers
+                .ToList();
+
+            return View(blah);
         }
 
-        public IActionResult Privacy()
+
+        // get and post constructors for editing movies
+        [HttpGet]
+        public IActionResult Edit(int bowlerid)
         {
-            return View();
+            ViewBag.Bowlers = _repo.Bowlers.ToList();
+
+            var bowl = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
+
+            return View("Form", bowl);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Edit(Bowler bowler)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _repo.Update(bowler);
+            _repo.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        // get and post constructors for deleting movies
+        [HttpGet]
+        public IActionResult Delete(int bowlerid)
+        {
+            var bowl = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
+
+            return View(bowl);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Bowler bowler)
+        {
+            _repo.Bowlers.Remove(bowler);
+            _repo.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
+
 }
