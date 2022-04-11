@@ -5,39 +5,21 @@
 
 @*Table to display bowler records*@
 <div class="container">
-    <table class="table table-hover table-striped table-bordered">
-        <thead style="font-weight:bold">
-            <tr>
-                <td scope="col">Last Name</td>
-                <td scope="col">First Name</td>
-                <td scope="col">Midle Initial</td>
-                <td scope="col">Phone Number</td>
-                <td scope="col">Address</td>
-                <td scope="col">City</td>
-                <td scope="col">State</td>
-                <td scope="col">Zip</td>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            @*for loop to display each movie*@
-            @foreach (var b in Model)
-            {
-                <tr>
-                    <td>@b.BowlerLastName</td>
-                    <td>@b.BowlerFirstName</td>
-                    <td>@b.BowlerMiddleInit</td>
-                    <td>@b.BowlerPhoneNumber</td>
-                    <td>@b.BowlerAddress</td>
-                    <td>@b.BowlerCity</td>
-                    <td>@b.BowlerState</td>
-                    <td>@b.BowlerZip</td>
-                    <td><a class="btn btn-warning" asp-controller="Home" asp-action="Edit" asp-route-applicationid="@b.BowlerID">Edit</a></td>
-                    <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-applicationid="@b.BowlerID">Delete</a></td>
-                </tr>
-
-            }
-        </tbody>
-    </table>
+    <div class="col-2">
+        <vc:filter></vc:filter>
+    </div>
+    <ul>
+        @foreach (var b in Model)
+        {
+            <li>@b.BowlerID</li>
+            <li>@b.BowlerFirstName</li>
+            <li>@b.BowlerMiddleInit</li>
+            <li>@b.BowlerLastName</li>
+            <li>@b.BowlerAddress</li>
+            <li>@b.BowlerCity</li>
+            <li>@b.BowlerState</li>
+            <li>@b.BowlerZip</li>
+            <li>@b.BowlerPhoneNumber</li>
+        }
+    </ul>
 </div>

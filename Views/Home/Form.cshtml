@@ -9,40 +9,48 @@
 
 <form method="post">
 
-    <div asp-validation-summary="All" class="text-danger"></div>
-
     <div class="form-group">
-        <label asp-for="BowlerLastName">Last Name</label>
-        <input asp-for="BowlerLastName" class="form-control" />
-
-        <label asp-for="BowlerFirstName">First Name</label>
-        <input asp-for="BowlerFirstName" class="form-control" />
-
-        <label asp-for="BowlerMiddleInit">Middle Initial</label>
-        <input asp-for="BowlerMiddleInit" class="form-control" />
-
-        <label asp-for="BowlerAddress">Street Address</label>
-        <input asp-for="BowlerAddress" class="form-control" />
-
-        <label asp-for="BowlerCity">City</label>
-        <input asp-for="BowlerCity" class="form-control" />
-
-        <label asp-for="BowlerState">State</label>
-        <input asp-for="BowlerState" class="form-control" />
-
-        <label asp-for="BowlerZip">Zipcode</label>
-        <input asp-for="BowlerZip" class="form-control" />
-
-        <label asp-for="BowlerPhoneNumber">Phone</label>
-        <input asp-for="BowlerPhoneNumber" class="form-control" />
-
+        <div class="form-group">
+            <label asp-for="BowlerLastName">Last Name</label>
+            <input asp-for="BowlerLastName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerFirstName">First Name</label>
+            <input asp-for="BowlerFirstName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerMiddleInit">Middle Initial</label>
+            <input asp-for="BowlerMiddleInit" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerAddress">Street Address</label>
+            <input asp-for="BowlerAddress" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerCity">City</label>
+            <input asp-for="BowlerCity" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerState">State</label>
+            <input asp-for="BowlerState" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerZip">Zipcode</label>
+            <input asp-for="BowlerZip" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="BowlerPhoneNumber">Phone</label>
+            <input asp-for="BowlerPhoneNumber" class="form-control" />
+        </div>
         <input type="hidden" asp-for="BowlerID" />
 
 
     </div>
 
-    <div class="float-end">
-        <input class="btn btn-primary" type="submit" />
+    <div class="form-group">
+        <button class="btn btn-default" type="submit">Submit</button>
     </div>
+
+    <div asp-validation-summary="All"></div>
 
 </form>

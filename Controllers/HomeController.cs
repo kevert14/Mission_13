@@ -12,19 +12,18 @@ namespace Mission_13.Controllers
 {
     public class HomeController : Controller
     {
-        private BowlingDbContext _repo { get; set; }
+        private BowlingDbContext repo { get; set; }
 
         public HomeController(BowlingDbContext temp)
         {
-            _repo = temp;
+            repo = temp;
         }
 
+        //display bowler data
         public IActionResult Index()
         {
-            var blah = _repo.Bowlers
-                .ToList();
-
-            return View(blah);
+            var stuff = repo.Bowlers.ToList();
+            return View(stuff);
         }
 
 
@@ -32,27 +31,28 @@ namespace Mission_13.Controllers
         [HttpGet]
         public IActionResult Edit(int bowlerid)
         {
-            ViewBag.Bowlers = _repo.Bowlers.ToList();
+            ViewBag.Bowlers = repo.Bowlers.ToList();
 
-            var bowl = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
+            var bowl = repo.Bowlers.Single(x => x.BowlerID == bowlerid);
 
             return View("Form", bowl);
         }
 
+        //edit crash post and update
         [HttpPost]
         public IActionResult Edit(Bowler bowler)
         {
-            _repo.Update(bowler);
-            _repo.SaveChanges();
+            repo.Update(bowler);
+            repo.SaveChanges();
 
-            return RedirectToAction("Index");
+            return View("Admin");
         }
 
         // get and post constructors for deleting movies
         [HttpGet]
         public IActionResult Delete(int bowlerid)
         {
-            var bowl = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
+            var bowl = repo.Bowlers.Single(x => x.BowlerID == bowlerid);
 
             return View(bowl);
         }
@@ -60,10 +60,10 @@ namespace Mission_13.Controllers
         [HttpPost]
         public IActionResult Delete(Bowler bowler)
         {
-            _repo.Bowlers.Remove(bowler);
-            _repo.SaveChanges();
+            repo.Bowlers.Remove(bowler);
+            repo.SaveChanges();
 
-            return RedirectToAction("Index");
+            return View("Admin");
         }
     }
 
